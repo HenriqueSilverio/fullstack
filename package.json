@@ -4,6 +4,7 @@
   "description": "A full stack JavaScript application sample.",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,6 +15,10 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongoose": "^4.6.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
