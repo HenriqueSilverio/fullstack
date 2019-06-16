@@ -1,10 +1,14 @@
-const express    = require('express');
-const bodyParser = require('body-parser');
-const api        = express();
+import express from 'express'
 
-api.use(bodyParser.json());
-api.use(bodyParser.urlencoded({ 'extended': true }));
+import routes from './products/routes'
 
-require('./colors/routes')(api);
+const api = express()
 
-module.exports = api;
+api.use(express.json())
+api.use(express.urlencoded({extended: true }))
+
+routes(api)
+
+export default () => {
+  api.listen(3001, () => console.log('API listening on port 3001...'))
+}
