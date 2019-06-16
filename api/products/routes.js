@@ -12,11 +12,11 @@ export default (api) => {
       res.json(products)
     })
     .post(async (req, res) => {
-      const Product = new Product({
+      const model = new Product({
         'name': req.body.name,
         'code': req.body.code
       })
-      const [ error, product ] = await Product.save()
+      const [ error, product ] = await to(model.save())
       if(error) {
         res.json({ 'error': 'Cannot CREATE product.' })
       }
