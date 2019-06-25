@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./server.js",
   "scripts": {
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js",
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node --require dotenv/config server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,8 +15,12 @@
   "author": "Henrique Silverio",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.6.0"
+    "jwt-simple": "^0.5.6",
+    "mongoose": "^5.6.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
