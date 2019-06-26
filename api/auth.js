@@ -25,10 +25,10 @@ const strategy = new Strategy(options, async (payload, done) => {
 passport.use(strategy)
 
 export default {
-  start() {
+  start () {
     return passport.initialize()
   },
-  authenticate() {
+  authenticate () {
     return passport.authenticate('jwt', { session: false })
   }
 }
