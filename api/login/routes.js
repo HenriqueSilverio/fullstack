@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import to from '../../lib/await-to'
@@ -13,7 +12,7 @@ export default (api) => {
         if (findError || !user) {
           return res.sendStatus(401)
         }
-        const [ matchError, match ] = await to(bcrypt.compare(req.body.password, user.password))
+        const [ matchError, match ] = await to(user.checkPassword(req.body.password))
         if (matchError || !match) {
           return res.sendStatus(401)
         }
