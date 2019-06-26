@@ -3,8 +3,20 @@ import mongoose from 'mongoose'
 const { model, Schema } = mongoose
 
 const User = model('User', new Schema({
-  email: { type: String, required: true },
-  password: { type: String, required: true, select: false }
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    select: false
+  }
 }, {
   timestamps: true,
   toObject: {
