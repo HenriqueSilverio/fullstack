@@ -13,7 +13,7 @@ const options = {
 
 const strategy = new Strategy(options, async (payload, done) => {
   const [ error, user ] = await to(User.findById(payload.id))
-  if (error) {
+  if (error || !user) {
     return done(error, null)
   }
   return done(null, {

@@ -10,17 +10,17 @@ export default (api) => {
         'email': req.body.email,
         'password': req.body.password
       })
-      const [ saveError, user ] = await to(model.save())
-      if (saveError) {
-        return res.json({ 'error': 'Cannot CREATE user.' })
+      const [ error, user ] = await to(model.save())
+      if (error) {
+        return res.json({ errors: [ { title: error.errmsg } ] })
       }
-      return res.json(user.toObject())
+      return res.json({ data: user.toObject() })
     })
     .get(auth.authenticate(), async (req, res) => {
       const [ error, users ] = await to(User.find())
       if (error) {
-        return res.json({ 'error': 'Cannot GET users.' })
+        return res.json({ errors: [ { title: error.errmsg } ] })
       }
-      return res.json(users.map(user => user.toObject()))
+      return res.json({ data: users.map(user => user.toObject()) })
     })
 }
