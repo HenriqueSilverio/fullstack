@@ -17,7 +17,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    lowercase: true,
     select: false
   }
 }, {
@@ -45,14 +44,8 @@ UserSchema.pre('save', async function (next) {
   next()
 })
 
-UserSchema.method('checkPassword', async function (password) {
-  const [ matchError, match ] = await to(bcrypt.compare(password, this.password))
-  if (matchError || !match) {
-    return false
-  }
-  return true
+UserSchema.method('checkPassword', function (password) {
+  return bcrypt.compare(password, this.password)
 })
 
-const UserModel = model('User', UserSchema)
-
-export default UserModel
+export default model('User', UserSchema)
