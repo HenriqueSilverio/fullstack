@@ -1,5 +1,6 @@
 import passport from 'passport'
 import passportJwt from 'passport-jwt'
+import acl from 'express-acl'
 
 import to from '../lib/await-to'
 import User from './users/model'
@@ -18,11 +19,23 @@ const strategy = new Strategy(options, async (payload, done) => {
   }
   return done(null, {
     id: user.id,
-    email: user.email
+    role: user.role
   })
 })
 
 passport.use(strategy)
+
+acl.config({
+  baseUrl: 'api',
+  decodedObjectName: 'user',
+  filename: 'roles.json',
+  path: 'api',
+  denyCallback: (res) => {
+    return res.status(403).json({
+      errors: [ { title: 'Forbidden' } ]
+    })
+  }
+})
 
 export default {
   start () {
@@ -30,5 +43,8 @@ export default {
   },
   authenticate () {
     return passport.authenticate('jwt', { session: false })
+  },
+  authorize () {
+    return acl.authorize
   }
 }
