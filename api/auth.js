@@ -26,7 +26,7 @@ const strategy = new Strategy(options, async (payload, done) => {
 passport.use(strategy)
 
 acl.config({
-  baseUrl: 'api',
+  baseUrl: 'api/v1',
   decodedObjectName: 'user',
   filename: 'roles.json',
   path: 'api',

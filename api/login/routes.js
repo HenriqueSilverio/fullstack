@@ -5,7 +5,7 @@ import to from '../../lib/await-to'
 import User from '../users/model'
 
 export default (api) => {
-  api.route('/api/login')
+  api.route('/api/v1/login')
     .post(async (req, res) => {
       if (req.body.email && req.body.password) {
         const [ findError, user ] = await to(User.findOne({ email: req.body.email }, { password: 1 }))

@@ -5,7 +5,7 @@ import User from './model'
 import policy from './policy'
 
 export default (api) => {
-  api.route('/api/users')
+  api.route('/api/v1/users')
     .post(async (req, res) => {
       const model = new User({
         email: req.body.email,
@@ -26,7 +26,7 @@ export default (api) => {
       return res.json({ data: users.map(user => user.toObject()) })
     })
 
-  api.route('/api/users/:id')
+  api.route('/api/v1/users/:id')
     .get(auth.authenticate(), auth.authorize(), policy.authorize('show'), async (req, res) => {
       return res.json({ data: req.resource.toObject() })
     })
