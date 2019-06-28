@@ -1,9 +1,7 @@
-import bcrypt from 'bcrypt'
-import mongoose from 'mongoose'
+const bcrypt = require('bcrypt')
+const { model, Schema } = require('mongoose')
 
-import to from '../../lib/await-to'
-
-const { model, Schema } = mongoose
+const to = require('../../lib/await-to')
 
 const UserSchema = new Schema({
   email: {
@@ -55,4 +53,4 @@ UserSchema.method('checkPassword', function (password) {
   return bcrypt.compare(password, this.password)
 })
 
-export default model('User', UserSchema)
+module.exports = model('User', UserSchema)

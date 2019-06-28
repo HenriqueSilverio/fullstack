@@ -1,10 +1,10 @@
-import jwt from 'jsonwebtoken'
+const jwt = require('jsonwebtoken')
 
-import to from '../../lib/await-to'
+const to = require('../../lib/await-to')
 
-import User from '../users/model'
+const User = require('../users/model')
 
-export default (api) => {
+module.exports = (api) => {
   api.route('/api/v1/login')
     .post(async (req, res) => {
       if (req.body.email && req.body.password) {

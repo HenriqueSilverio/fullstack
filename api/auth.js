@@ -1,9 +1,9 @@
-import passport from 'passport'
-import passportJwt from 'passport-jwt'
-import acl from 'express-acl'
+const passport = require('passport')
+const passportJwt = require('passport-jwt')
+const acl = require('express-acl')
 
-import to from '../lib/await-to'
-import User from './users/model'
+const to = require('../lib/await-to')
+const User = require('./users/model')
 
 const { Strategy, ExtractJwt } = passportJwt
 
@@ -37,7 +37,7 @@ acl.config({
   }
 })
 
-export default {
+module.exports = {
   start () {
     return passport.initialize()
   },

@@ -1,6 +1,6 @@
-import to from '../../lib/await-to'
+const to = require('../../lib/await-to')
 
-import User from './model'
+const User = require('./model')
 
 function deny (req, res, next) {
   return res.status(401).json({ errors: [ { title: 'Unauthorized' } ] })
@@ -28,4 +28,4 @@ function authorize (action) {
   return actions[action] || deny
 }
 
-export default { authorize }
+module.exports = { authorize }

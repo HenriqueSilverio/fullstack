@@ -1,7 +1,7 @@
-import database from './database'
-import api from './api/api'
+const database = require('./database')
+const api = require('./api/api')
 
-(async () => {
+;(async () => {
   await database()
   api()
 })()

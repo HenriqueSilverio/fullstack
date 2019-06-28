@@ -1,10 +1,10 @@
-import to from '../../lib/await-to'
+const to = require('../../lib/await-to')
 
-import auth from '../auth'
-import User from './model'
-import policy from './policy'
+const auth = require('../auth')
+const User = require('./model')
+const policy = require('./policy')
 
-export default (api) => {
+module.exports = (api) => {
   api.route('/api/v1/users')
     .post(async (req, res) => {
       const model = new User({

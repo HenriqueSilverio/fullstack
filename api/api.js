@@ -1,8 +1,8 @@
-import express from 'express'
+const express = require('express')
 
-import auth from './auth'
-import login from './login/routes'
-import users from './users/routes'
+const auth = require('./auth')
+const login = require('./login/routes')
+const users = require('./users/routes')
 
 const api = express()
 
@@ -13,6 +13,4 @@ api.use(auth.start())
 login(api)
 users(api)
 
-export default () => {
-  api.listen(3000, () => console.log('API listening on port 3000...'))
-}
+module.exports = () => api.listen(3000, () => console.log('API listening on port 3000...'))
