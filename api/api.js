@@ -14,5 +14,5 @@ login(api)
 users(api)
 
 export default () => {
-  api.listen(3001, () => console.log('API listening on port 3001...'))
+  api.listen(3000, () => console.log('API listening on port 3000...'))
 }
