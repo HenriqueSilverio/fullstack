@@ -3,7 +3,7 @@ const to = require('../../lib/await-to')
 const User = require('./model')
 
 function deny (req, res, next) {
-  return res.status(401).json({ errors: [ { title: 'Unauthorized' } ] })
+  return res.status(403).json({ errors: [ { title: 'Unauthorized' } ] })
 }
 
 const actions = {

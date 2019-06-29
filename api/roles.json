@@ -8,6 +8,10 @@
 }, {
   "group": "user",
   "permissions": [{
+    "resource": "users/",
+    "methods": [ "GET" ],
+    "action": "deny"
+  }, {
     "resource": "users/:id",
     "methods": [ "GET", "PUT" ],
     "action": "allow"

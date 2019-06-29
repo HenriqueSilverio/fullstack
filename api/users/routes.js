@@ -21,7 +21,7 @@ module.exports = (api) => {
     .get(auth.authenticate(), auth.authorize(), async (req, res) => {
       const [ error, users ] = await to(User.find())
       if (error) {
-        return res.json({ errors: [ { title: error.errmsg } ] })
+        return res.status(403).json({ errors: [ { title: error.errmsg } ] })
       }
       return res.json({ data: users.map(user => user.toObject()) })
     })

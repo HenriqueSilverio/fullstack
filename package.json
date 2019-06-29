@@ -5,7 +5,7 @@
   "main": "./server.js",
   "scripts": {
     "start": "nodemon --require dotenv/config server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test mocha"
   },
   "repository": {
     "type": "git",
@@ -19,17 +19,21 @@
     "express": "^4.17.1",
     "express-acl": "^2.0.7",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.6.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.0.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "nodemon": "^1.19.1"
+    "mocha": "^6.1.4",
+    "mongodb-memory-server": "^5.1.5",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
