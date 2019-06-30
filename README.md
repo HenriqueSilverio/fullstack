@@ -9,7 +9,7 @@
 
 **1.** Clone to your machine, and `cd` into it:
 ```
-git clone git@github.com:HenriqueSilverio/fullstack.git && cd fullstack
+git clone https://github.com/HenriqueSilverio/fullstack.git && cd fullstack
 ```
 
 **2.** Install project dependencies:
