@@ -1,0 +1,6 @@
+{
+  "file": [ "test/setup" ],
+  "require": [ "dotenv/config" ],
+  "recursive": true,
+  "slow": 5000
+}
