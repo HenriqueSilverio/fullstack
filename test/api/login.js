@@ -1,6 +1,6 @@
-const User = require('../api/users/model')
+const User = require('../../api/users/model')
 
-describe('POST /login', () => {
+describe('User login', () => {
   before(async () => {
     await User.deleteMany({})
     await User.create({ email: 'admin@server.com', password: 'secret', role: 'admin' })
