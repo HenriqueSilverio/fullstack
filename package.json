@@ -32,6 +32,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
+    "helmet": "^3.18.0",
     "mocha": "^6.1.4",
     "mongodb-memory-server": "^5.1.5",
     "nodemon": "^1.19.1",

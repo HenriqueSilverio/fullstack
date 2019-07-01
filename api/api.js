@@ -1,4 +1,5 @@
 const express = require('express')
+const helmet = require('helmet')
 
 const database = require('../database')
 
@@ -8,6 +9,7 @@ const users = require('./users/routes')
 
 const api = express()
 
+api.use(helmet())
 api.use(express.json())
 api.use(express.urlencoded({ extended: true }))
 api.use(auth.start())
