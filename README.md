@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- [NodeJS](https://nodejs.org/) `^12`
+- [NodeJS](https://nodejs.org/) `^10`
 - [MongoDB](https://www.mongodb.com/download-center/community) `^4`
 
 ## Usage
