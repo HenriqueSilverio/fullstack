@@ -4,8 +4,8 @@ const supertest = require('supertest')
 const api = require('../api/api')
 
 before(async () => {
-  await api.start()
+  const instance = await api.start()
   global.expect = chai.expect
-  global.request = supertest(api.instance)
+  global.request = supertest(instance)
   console.log('\n')
 })

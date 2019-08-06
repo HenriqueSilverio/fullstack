@@ -18,14 +18,15 @@ login(api)
 users(api)
 
 module.exports = {
-  instance: api,
   start () {
-    return new Promise(async resolve => {
-      await database()
-      api.listen(3000, () => {
-        console.log('API listening on port 3000...')
-        resolve()
-      })
+    return new Promise(resolve => {
+      database()
+        .then(() => {
+          api.listen(3000, () => {
+            console.log('API listening on port 3000...')
+            resolve(api)
+          })
+        })
     })
   }
 }
