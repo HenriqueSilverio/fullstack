@@ -1,3 +1,5 @@
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=HenriqueSilverio/fullstack)](https://dependabot.com)
+
 # Full-Stack JavaScript
 
 ## Requirements
