@@ -35,7 +35,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^6.2.1",
     "mongodb-memory-server": "^5.2.5",
-    "nodemon": "^1.19.2",
+    "nodemon": "^1.19.3",
     "supertest": "^4.0.2"
   }
 }
