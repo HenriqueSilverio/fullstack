@@ -14,8 +14,8 @@ api.use(express.json())
 api.use(express.urlencoded({ extended: true }))
 api.use(auth.start())
 
-login(api)
-users(api)
+api.use('/api/v1/login', login)
+api.use('/api/v1/users', users)
 
 module.exports = {
   start () {
