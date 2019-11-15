@@ -19,7 +19,12 @@ const getConnectionString = {
 
 module.exports = async () => {
   const uri = await getConnectionString[process.env.NODE_ENV || 'default']()
-  const options = { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true }
+  const options = {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+  }
   mongoose.connection.on('error', console.error.bind(console, 'Connection error:'))
   mongoose.connection.once('open', () => console.log('Connected to database!'))
   return mongoose.connect(uri, options)
