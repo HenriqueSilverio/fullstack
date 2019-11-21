@@ -13,7 +13,7 @@ const options = {
 }
 
 const strategy = new Strategy(options, async (payload, done) => {
-  const [ error, user ] = await to(User.findById(payload.id))
+  const [error, user] = await to(User.findById(payload.id))
   if (error || !user) {
     return done(error, null)
   }
@@ -32,7 +32,7 @@ acl.config({
   path: 'api',
   denyCallback: (res) => {
     return res.status(403).json({
-      errors: [ { title: 'Forbidden' } ]
+      errors: [{ title: 'Forbidden' }]
     })
   }
 })

@@ -3,12 +3,12 @@ const to = require('../../lib/await-to')
 const User = require('./model')
 
 function deny (req, res, next) {
-  return res.status(403).json({ errors: [ { title: 'Unauthorized' } ] })
+  return res.status(403).json({ errors: [{ title: 'Unauthorized' }] })
 }
 
 const actions = {
   async show (req, res, next) {
-    const [ error, user ] = await to(User.findById(req.params.id))
+    const [error, user] = await to(User.findById(req.params.id))
     if (error || !user) {
       return deny(req, res, next)
     }

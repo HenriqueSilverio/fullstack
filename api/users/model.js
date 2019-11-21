@@ -42,7 +42,7 @@ UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next()
   }
-  const [ hashError, hash ] = await to(bcrypt.hash(this.password, 10))
+  const [hashError, hash] = await to(bcrypt.hash(this.password, 10))
   if (hashError) {
     return next(hashError)
   }
