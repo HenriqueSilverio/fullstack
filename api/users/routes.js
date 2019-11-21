@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const { addAsync } = require('@awaitjs/express')
 
 const to = require('../../lib/await-to')
 
@@ -8,7 +9,7 @@ const policy = require('./policy')
 
 const router = Router()
 
-router.route('/')
+addAsync(router.route('/'))
   .post(async (req, res) => {
     const model = new User({
       email: req.body.email,
@@ -29,7 +30,7 @@ router.route('/')
     return res.json({ data: users.map(user => user.toObject()) })
   })
 
-router.route('/:id')
+addAsync(router.route('/:id'))
   .get(auth.authenticate(), auth.authorize(), policy.authorize('show'), async (req, res) => {
     return res.json({ data: req.resource.toObject() })
   })

@@ -1,3 +1,4 @@
+const { addAsync } = require('@awaitjs/express')
 const express = require('express')
 const helmet = require('helmet')
 
@@ -7,7 +8,7 @@ const auth = require('./auth')
 const login = require('./login/routes')
 const users = require('./users/routes')
 
-const api = express()
+const api = addAsync(express())
 
 api.use(helmet())
 api.use(express.json())

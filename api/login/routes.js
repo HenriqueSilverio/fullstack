@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { Router } = require('express')
+const { addAsync } = require('@awaitjs/express')
 
 const to = require('../../lib/await-to')
 
@@ -7,8 +8,8 @@ const User = require('../users/model')
 
 const router = Router()
 
-router.route('/')
-  .post(async (req, res) => {
+addAsync(router.route('/'))
+  .postAsync(async (req, res) => {
     if (req.body.email && req.body.password) {
       const [findError, user] = await to(User.findOne({ email: req.body.email }, { password: 1 }))
       if (findError || !user) {
