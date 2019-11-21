@@ -1,4 +1,5 @@
 const { addAsync } = require('@awaitjs/express')
+const createError = require('http-errors')
 const express = require('express')
 const helmet = require('helmet')
 
@@ -17,6 +18,16 @@ api.use(auth.start())
 
 api.use('/api/v1/login', login)
 api.use('/api/v1/users', users)
+
+api.use((req, res, next) => next(createError(404)))
+
+api.use((error, req, res, next) => {
+  res.status(error.status || 500).json({
+    status: error.status,
+    message: error.message,
+    stack: error.stack
+  })
+})
 
 module.exports = {
   start () {

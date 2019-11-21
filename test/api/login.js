@@ -30,7 +30,7 @@ describe('User login', () => {
         .expect(401)
         .end((err, res) => {
           if (err) { return done(err) }
-          expect(res.body).to.include.keys('errors')
+          expect(res.body).to.include.keys('status', 'message', 'stack')
           done()
         })
     })
@@ -43,7 +43,7 @@ describe('User login', () => {
         .expect(401)
         .end((err, res) => {
           if (err) { return done(err) }
-          expect(res.body).to.include.keys('errors')
+          expect(res.body).to.include.keys('status', 'message', 'stack')
           done()
         })
     })
@@ -52,7 +52,7 @@ describe('User login', () => {
         .expect(401)
         .end((err, res) => {
           if (err) { return done(err) }
-          expect(res.body).to.include.keys('errors')
+          expect(res.body).to.include.keys('status', 'message', 'stack')
           done()
         })
     })

@@ -1,8 +1,8 @@
+const createError = require('http-errors')
 const passport = require('passport')
 const passportJwt = require('passport-jwt')
 const acl = require('express-acl')
 
-const to = require('../lib/await-to')
 const User = require('./users/model')
 
 const { Strategy, ExtractJwt } = passportJwt
@@ -13,14 +13,18 @@ const options = {
 }
 
 const strategy = new Strategy(options, async (payload, done) => {
-  const [error, user] = await to(User.findById(payload.id))
-  if (error || !user) {
-    return done(error, null)
+  try {
+    const user = await User.findById(payload.id)
+    if (!user) {
+      return done(null, false)
+    }
+    return done(null, {
+      id: user.id,
+      role: user.role
+    })
+  } catch (error) {
+    return done(error, false)
   }
-  return done(null, {
-    id: user.id,
-    role: user.role
-  })
 })
 
 passport.use(strategy)
@@ -31,9 +35,7 @@ acl.config({
   filename: 'roles.json',
   path: 'api',
   denyCallback: (res) => {
-    return res.status(403).json({
-      errors: [{ title: 'Forbidden' }]
-    })
+    throw createError(403)
   }
 })
 

@@ -1,8 +1,6 @@
 const { Router } = require('express')
 const { addAsync } = require('@awaitjs/express')
 
-const to = require('../../lib/await-to')
-
 const auth = require('../auth')
 const User = require('./model')
 const policy = require('./policy')
@@ -10,28 +8,19 @@ const policy = require('./policy')
 const router = Router()
 
 addAsync(router.route('/'))
-  .post(async (req, res) => {
-    const model = new User({
-      email: req.body.email,
-      password: req.body.password,
-      role: req.body.role
-    })
-    const [error, user] = await to(model.save())
-    if (error) {
-      return res.status(400).json({ errors: [{ title: error.errmsg }] })
-    }
+  .postAsync(async (req, res) => {
+    const { email, password, role } = req.body
+    const model = new User({ email, password, role })
+    const user = await model.save()
     return res.json({ data: user.toObject() })
   })
-  .get(auth.authenticate(), auth.authorize(), async (req, res) => {
-    const [error, users] = await to(User.find())
-    if (error) {
-      return res.status(400).json({ errors: [{ title: error.errmsg }] })
-    }
+  .getAsync(auth.authenticate(), auth.authorize(), async (req, res) => {
+    const users = await User.find()
     return res.json({ data: users.map(user => user.toObject()) })
   })
 
 addAsync(router.route('/:id'))
-  .get(auth.authenticate(), auth.authorize(), policy.authorize('show'), async (req, res) => {
+  .getAsync(auth.authenticate(), auth.authorize(), policy.authorize('show'), async (req, res) => {
     return res.json({ data: req.resource.toObject() })
   })
 
