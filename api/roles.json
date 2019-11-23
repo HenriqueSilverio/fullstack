@@ -18,5 +18,15 @@
         "action": "allow"
       }
     ]
+  },
+  {
+    "group": "user",
+    "permissions": [
+      {
+        "resource": "users/:id",
+        "methods": ["GET"],
+        "action": "allow"
+      }
+    ]
   }
 ]
