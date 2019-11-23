@@ -23,7 +23,7 @@ addAsync(router.route('/'))
     }
     return res.json({
       data: {
-        token: jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '30m' })
+        token: jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '30m' })
       }
     })
   })

@@ -16,8 +16,8 @@ describe('Users resource', () => {
     ])
     admin = users[0]
     user = users[1]
-    adminToken = jwt.sign({ id: admin.id }, process.env.JWT_SECRET, { expiresIn: '30m' })
-    userToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '30m' })
+    adminToken = jwt.sign({ id: admin.id, role: admin.role }, process.env.JWT_SECRET, { expiresIn: '30m' })
+    userToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '30m' })
   })
   describe('POST /api/v1/users', () => {
     it('Creates a new user', done => {
@@ -50,68 +50,66 @@ describe('Users resource', () => {
           })
       })
     })
-  //   describe('As a user', () => {
-  //     it('Cant view all users', done => {
-  //       request.get('/api/v1/users')
-  //         .set('Authorization', `Bearer ${userToken}`)
-  //         .expect(403)
-  //         .end((err, res) => {
-  //           if (err) { return done(err) }
-  //           expect(res.body).to.includes.keys('errors')
-  //           expect(res.body.errors).to.be.an('array')
-  //           done()
-  //         })
-  //     })
-  //   })
-  // })
-  // describe('GET /api/v1/users/:id', () => {
-  //   describe('As a admin', () => {
-  //     it('Can view my own profile', done => {
-  //       request.get(`/api/v1/users/${admin.id}`)
-  //         .set('Authorization', `Bearer ${adminToken}`)
-  //         .expect(200)
-  //         .end((err, res) => {
-  //           if (err) { return done(err) }
-  //           expect(res.body).to.includes.keys('data')
-  //           expect(res.body.data).to.be.an('object')
-  //           done()
-  //         })
-  //     })
-  //     it('Can view others profile', done => {
-  //       request.get(`/api/v1/users/${user.id}`)
-  //         .set('Authorization', `Bearer ${adminToken}`)
-  //         .expect(200)
-  //         .end((err, res) => {
-  //           if (err) { return done(err) }
-  //           expect(res.body).to.includes.keys('data')
-  //           expect(res.body.data).to.be.an('object')
-  //           done()
-  //         })
-  //     })
-  //   })
-  //   describe('As a user', () => {
-  //     it('Can view my own profile', done => {
-  //       request.get(`/api/v1/users/${user.id}`)
-  //         .set('Authorization', `Bearer ${userToken}`)
-  //         .expect(200)
-  //         .end((err, res) => {
-  //           if (err) { return done(err) }
-  //           expect(res.body).to.includes.keys('data')
-  //           expect(res.body.data).to.be.an('object')
-  //           done()
-  //         })
-  //     })
-  //     it('Cant view others profile', done => {
-  //       request.get(`/api/v1/users/${admin.id}`)
-  //         .set('Authorization', `Bearer ${userToken}`)
-  //         .expect(403)
-  //         .end((err, res) => {
-  //           if (err) { return done(err) }
-  //           expect(res.body).to.includes.keys('errors')
-  //           expect(res.body.errors).to.be.an('array')
-  //           done()
-  //         })
-  //     })
-  //   })
+    describe('As a user', () => {
+      it('Cant view all users', done => {
+        request.get('/api/v1/users')
+          .set('Authorization', `Bearer ${userToken}`)
+          .expect(403)
+          .end((err, res) => {
+            if (err) { return done(err) }
+            expect(res.body).to.include.keys('status', 'message', 'stack')
+            done()
+          })
+      })
+    })
+  })
+  describe('GET /api/v1/users/:id', () => {
+    describe('As a admin', () => {
+      it('Can view my own profile', done => {
+        request.get(`/api/v1/users/${admin.id}`)
+          .set('Authorization', `Bearer ${adminToken}`)
+          .expect(200)
+          .end((err, res) => {
+            if (err) { return done(err) }
+            expect(res.body).to.includes.keys('data')
+            expect(res.body.data).to.be.an('object')
+            done()
+          })
+      })
+      it('Can view others profile', done => {
+        request.get(`/api/v1/users/${user.id}`)
+          .set('Authorization', `Bearer ${adminToken}`)
+          .expect(200)
+          .end((err, res) => {
+            if (err) { return done(err) }
+            expect(res.body).to.includes.keys('data')
+            expect(res.body.data).to.be.an('object')
+            done()
+          })
+      })
+    })
+    describe('As a user', () => {
+      it('Can view my own profile', done => {
+        request.get(`/api/v1/users/${user.id}`)
+          .set('Authorization', `Bearer ${userToken}`)
+          .expect(200)
+          .end((err, res) => {
+            if (err) { return done(err) }
+            expect(res.body).to.includes.keys('data')
+            expect(res.body.data).to.be.an('object')
+            done()
+          })
+      })
+      it('Cant view others profile', done => {
+        request.get(`/api/v1/users/${admin.id}`)
+          .set('Authorization', `Bearer ${userToken}`)
+          .expect(403)
+          .end((err, res) => {
+            if (err) { return done(err) }
+            expect(res.body).to.include.keys('status', 'message', 'stack')
+            done()
+          })
+      })
+    })
   })
 })

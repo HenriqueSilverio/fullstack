@@ -24,7 +24,7 @@
     "permissions": [
       {
         "resource": "users/:id",
-        "methods": ["GET"],
+        "methods": ["GET", "PUT"],
         "action": "allow"
       }
     ]

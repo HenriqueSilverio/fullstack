@@ -1,33 +1,6 @@
-const createError = require('http-errors')
-const passport = require('passport')
-const passportJwt = require('passport-jwt')
 const acl = require('express-acl')
-
-const User = require('./users/model')
-
-const { Strategy, ExtractJwt } = passportJwt
-
-const options = {
-  secretOrKey: process.env.JWT_SECRET,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-}
-
-const strategy = new Strategy(options, async (payload, done) => {
-  try {
-    const user = await User.findById(payload.id)
-    if (!user) {
-      return done(null, false)
-    }
-    return done(null, {
-      id: user.id,
-      role: user.role
-    })
-  } catch (error) {
-    return done(error, false)
-  }
-})
-
-passport.use(strategy)
+const jwt = require('jsonwebtoken')
+const createError = require('http-errors')
 
 acl.config({
   baseUrl: 'api/v1',
@@ -39,12 +12,22 @@ acl.config({
   }
 })
 
+const Gate = {
+  async authenticate (req, res, next) {
+    const header = req.headers.authorization
+    const token = header && header.split(' ')[1]
+    if (!token) throw createError(401)
+    jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
+      if (error) throw createError(403)
+      req.user = user
+      next()
+    })
+  }
+}
+
 module.exports = {
-  start () {
-    return passport.initialize()
-  },
   authenticate () {
-    return passport.authenticate('jwt', { session: false })
+    return Gate.authenticate
   },
   authorize () {
     return acl.authorize
