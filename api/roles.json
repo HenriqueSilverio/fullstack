@@ -1,19 +1,32 @@
-[{
-  "group": "admin",
-  "permissions": [{
-    "resource": "*",
-    "methods": "*",
-    "action": "allow"
-  }]
-}, {
-  "group": "user",
-  "permissions": [{
-    "resource": "users/",
-    "methods": [ "GET" ],
-    "action": "deny"
-  }, {
-    "resource": "users/:id",
-    "methods": [ "GET", "PUT" ],
-    "action": "allow"
-  }]
-}]
+[
+  {
+    "group": "guest",
+    "permissions": [
+      {
+        "resource": "users/",
+        "methods": ["POST"],
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "user",
+    "permissions": [
+      {
+        "resource": "users/:id",
+        "methods": ["GET", "PUT"],
+        "action": "allow"
+      }
+    ]
+  }
+]

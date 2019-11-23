@@ -1,23 +1,23 @@
-const to = require('../../lib/await-to')
+const createError = require('http-errors')
 
 const User = require('./model')
 
 function deny (req, res, next) {
-  return res.status(403).json({ errors: [ { title: 'Unauthorized' } ] })
+  throw createError(403)
 }
 
 const actions = {
   async show (req, res, next) {
-    const [ error, user ] = await to(User.findById(req.params.id))
-    if (error || !user) {
-      return deny(req, res, next)
+    const user = await User.findById(req.params.id)
+    if (!user) {
+      return deny()
     }
     if (req.user.role === 'admin') {
       req.resource = user
       return next()
     }
     if (req.user.id !== user.id) {
-      return deny(req, res, next)
+      return deny()
     }
     req.resource = user
     next()
