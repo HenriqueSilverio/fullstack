@@ -22,9 +22,7 @@
     "helmet": "^3.21.2",
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.12",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0"
+    "mongoose": "^5.7.12"
   },
   "devDependencies": {
     "chai": "^4.2.0",
