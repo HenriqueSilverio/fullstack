@@ -16,8 +16,8 @@ describe('Users resource', () => {
     ])
     admin = users[0]
     user = users[1]
-    adminToken = jwt.sign({ id: admin.id, role: admin.role }, process.env.JWT_SECRET, { expiresIn: '30m' })
-    userToken = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '30m' })
+    adminToken = jwt.sign({ id: admin.id }, process.env.JWT_SECRET, { expiresIn: '30m' })
+    userToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '30m' })
   })
   describe('POST /api/v1/users', () => {
     it('Creates a new user', done => {

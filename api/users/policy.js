@@ -2,7 +2,7 @@ const createError = require('http-errors')
 
 const User = require('./model')
 
-function deny (req, res, next) {
+async function deny (req, res, next) {
   throw createError(403)
 }
 
