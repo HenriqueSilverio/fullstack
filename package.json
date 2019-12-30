@@ -14,7 +14,7 @@
   "author": "Henrique Silvério",
   "license": "MIT",
   "dependencies": {
-    "@awaitjs/express": "^0.3.0",
+    "@awaitjs/express": "^0.4.0",
     "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
