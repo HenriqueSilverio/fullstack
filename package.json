@@ -22,7 +22,7 @@
     "helmet": "^3.21.3",
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.3"
+    "mongoose": "^5.9.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
