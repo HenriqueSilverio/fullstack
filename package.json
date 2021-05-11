@@ -16,7 +16,7 @@
   "dependencies": {
     "@awaitjs/express": "^0.7.2",
     "bcrypt": "^5.0.1",
-    "dotenv": "^9.0.1",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-acl": "^2.0.8",
     "helmet": "^4.6.0",
